@@ -1,9 +1,4 @@
 ---
-title: "Manejo de datos geográficos mediante R y RStudio"
-subtitle: "II Jornadas de SIG y TD libres"
-author: "Manuel Vargas"
-institute: "Escuela de Geografía. Universidad de Costa Rica"
-date: "2020-07-10"
 output:
   html_document:
     theme: readable    
@@ -18,7 +13,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+![](img/Taller-7-01.png)
+
 ## Presentación
+Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", programado para el 10 de julio de 2020 las 8:00 a.m., hora de Costa Rica. El taller forma parte de la II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica, organizada por la Escuela de Geografía de la Universidad de Costa Rica.
 
 ## Introducción
 
@@ -42,7 +40,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Paquetes de R
 * Sitio web del paquete sf de R: [Simple Features for R - sf](https://r-spatial.github.io/sf/)
 * Sitio web del paquete raster de R: [Raster data manipulation - R](https://rspatial.org/raster/spatial/8-rastermanip.html)
-
 * Sitio web del paquete flexdashboard de R: [flexdashboard: Easy interactive dashboards for R](https://rmarkdown.rstudio.com/flexdashboard/)
 * Sitio web del paquete Leaflet para R: [Leaflet for R](https://rstudio.github.io/leaflet/)
 * Sitio web del paquete Plotly para R: [Plotly R Open Source Graphing Library](https://plotly.com/r/)
