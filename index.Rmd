@@ -35,9 +35,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Datos raster
 
 ## Recursos recomendados
+### R y RStudio
 * Sitio web del lenguaje de programación R: [The R Project for Statistical Computing](https://www.r-project.org/)
 * Sitio web del entorno de desarrollo RStudio: [RStudio | Open source & professional software for data science teams](https://rstudio.com/)
 
+### Paquetes de R
 * Sitio web del paquete sf de R: [Simple Features for R - sf](https://r-spatial.github.io/sf/)
 * Sitio web del paquete raster de R: [Raster data manipulation - R](https://rspatial.org/raster/spatial/8-rastermanip.html)
 
@@ -45,6 +47,10 @@ knitr::opts_chunk$set(echo = TRUE)
 * Sitio web del paquete Leaflet para R: [Leaflet for R](https://rstudio.github.io/leaflet/)
 * Sitio web del paquete Plotly para R: [Plotly R Open Source Graphing Library](https://plotly.com/r/)
 * Sitio web del paquete DT para R: [DT: An R interface to the DataTables library](https://rstudio.github.io/DT/)
+
+### Git
 * Sitio web del sistema Git para control de versiones: [Git](https://git-scm.com/)
+
+### Libros
 * Libro "Geocomputation with R", de Lovelace et al.: [Geocomputation with R](https://geocompr.robinlovelace.net/)
 * Libro "R Markdown: The Definitive Guide", de Xie et al.: [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
