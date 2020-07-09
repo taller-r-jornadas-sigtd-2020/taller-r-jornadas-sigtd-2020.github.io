@@ -1,0 +1,19 @@
+---
+title: "Taller - Manejo de datos geográficos mediante R y RStudio"
+author: "Manuel Vargas"
+date: "2020-07-10"
+output:
+  html_document:
+    theme: readable    
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
