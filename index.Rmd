@@ -16,11 +16,27 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](img/Taller-7-01.png)
 
 ## Presentación
-Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", programado para el 10 de julio de 2020 las 8:00 a.m., hora de Costa Rica. El taller forma parte de la II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica, organizada por la Escuela de Geografía de la Universidad de Costa Rica.
+Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", el cual forma parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
+
+El sitio contiene tanto las explicaciones teóricas como el código fuente que las ejemplifica, junto con los enlaces a los datos utilizados.
 
 ## Introducción
+El procesamiento de datos geográficos mediante programas es una alternativa y un complemento al enfoque de procesamiento basado en aplicaciones SIG de escritorio (ej. ArcGIS, QGIS). Entre sus ventajas, pueden mencionarse su flexibilidad y reproducibilidad.
 
 ## El lenguaje de programación R
+[R](https://www.r-project.org/) es un lenguaje de programación enfocado en análisis estadístico. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse [aprendizaje automático (_machine learning_)](https://en.wikipedia.org/wiki/Machine_learning), [ciencia de datos](https://en.wikipedia.org/wiki/Data_science) y [_big data_](https://en.wikipedia.org/wiki/Big_data), con aplicaciones en campos como biomedicina, bioinformática y finanzas, entre muchos otros. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993.
+
+Algunas de las principales características de este lenguaje son:
+
+* Es [interpretado](https://en.wikipedia.org/wiki/Interpreter_(computing)): las instrucciones se traducen una por una a [lenguaje máquina](https://en.wikipedia.org/wiki/Machine_code), a diferencia de los [lenguajes compilados](https://en.wikipedia.org/wiki/Compiler), que traducen de manera conjunta las instrucciones de una unidad completa (ej. un programa o una biblioteca). Los lenguajes interpretados tienden a ser más lentos que los compilados, pero también son más flexibles.
+* Es [multiplataforma](https://en.wikipedia.org/wiki/Cross-platform_software): puede ejecutarse en los sistemas operativos más populares (ej. Microsoft Windows, macOS, Linux).
+* Tiene un [sistema de tipos de datos dinámico](https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/): las variables pueden tomar diferentes tipos de datos (ej. textuales, numéricos) durante la ejecución del programa, a diferencia del caso de un sistema de tipos de datos estático, en el que las variables solo pueden tener un tipo de datos.
+* Soporta varios [paradigmas de programación](https://en.wikipedia.org/wiki/Programming_paradigm): los paradigmas son estilos o enfoques teóricos de programación. R soporta los paradigmas de [programación orientada a objetos](https://en.wikipedia.org/wiki/Object-oriented_programming), [programación imperativa](https://en.wikipedia.org/wiki/Imperative_programming), [programación funcional](https://en.wikipedia.org/wiki/Functional_programming) y [programación procedimental](https://en.wikipedia.org/wiki/Procedural_programming).
+
+R es un proyecto de [software libre](https://en.wikipedia.org/wiki/Free_software) que se comparte mediante una licencia [GNU General Public Licence (GNU GPL)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.
+
+Para programar en R, puede utilizarse una interfaz de línea de comandos y también ambientes de desarrollo integrados (IDE, _integrated development environment_) como [Jupyter](https://jupyter.org/) o [RStudio](https://rstudio.com/).
+
 ### Instalación de R y RStudio
 ### Sintaxis
 #### Funciones
