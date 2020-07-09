@@ -1,6 +1,8 @@
 ---
-title: "Taller - Manejo de datos geográficos mediante R y RStudio"
+title: "Manejo de datos geográficos mediante R y RStudio"
+subtitle: "II Jornadas de SIG y TD libres"
 author: "Manuel Vargas"
+institute: "Escuela de Geografía. Universidad de Costa Rica"
 date: "2020-07-10"
 output:
   html_document:
@@ -16,4 +18,20 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Presentación
+
 ## Introducción
+
+## El lenguaje de programación R
+### Instalación de R y RStudio
+### Sintaxis
+#### Funciones
+#### Tipos de datos
+### RMarkdown
+
+## El ecosistema geoespacial de R
+
+### Datos vectoriales
+### Datos raster
+
+## Recursos recomendados
