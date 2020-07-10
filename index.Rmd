@@ -16,18 +16,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](img/Taller-7-01.png)
 
-## ¡Antes de empezar!
-Para reproducir los ejemplos en lenguaje R de este taller, debe instalar los programas R y RStudio disponibles en los siguientes enlaces:
-
-* [Instalador de R](https://cran.r-project.org/mirrors.html)
-* [Instalador de RStudio](https://www.rstudio.com/)
-
-**Debe instalarse primero R y luego RStudio**. Si lo desea, puede seguir la guía disponible en [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu - DataCamp](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu/).
-
 ## Presentación
 Este sitio web contiene los materiales del taller "Manejo de datos geográficos mediante R y RStudio", el cual es parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
 
 El sitio contiene tanto las explicaciones teóricas como el código fuente en R que las ejemplifica y los enlaces a los datos utilizados. Todo los recursos están disponibles en [https://github.com/taller-r-jornadas-sigtd-2020](https://github.com/taller-r-jornadas-sigtd-2020).
+
+## ¡Antes de empezar!
+Para reproducir los ejemplos en lenguaje R de este taller, primero debe instalar los programas R y RStudio, disponibles en los siguientes enlaces:
+
+* [Instalador de R](https://cloud.r-project.org/). **Nota importante**: a la fecha de escritura de este documento ya está disponible la versión 4 de R. Sin embargo, los ejemplos de este taller se probaron con la [versión 3.6.3 para Windows](https://cran.r-project.org/bin/windows/base/old/3.6.3/R-3.6.3-win.exe).
+* [Instalador de RStudio](https://rstudio.com/products/rstudio/download/#download).
+
+**Debe instalarse primero R y luego RStudio**. Si lo desea, puede seguir la guía disponible en [RStudio para Estadística Descriptiva en Ciencias Sociales](https://bookdown.org/gboccardo/manual-ED-UCH/instalacion-de-los-softwares-a-utilizar-en-este-manual.html). También puede consultar [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu - DataCamp](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu/).
 
 ## Introducción
 Durante las últimas décadas, las aplicaciones SIG de escritorio (ej. ArcGIS, QGIS) han sido la forma más popular de procesamiento de datos geográficos mediante computadoras. Estas aplicaciones están basadas en una interfaz gráfica a la que el usuario accede mediante menús, botones, íconos y otros elementos similares. A pesar de sus ventajas, entre las que pueden destacarse su facilidad de uso y rápida curva de aprendizaje, los procesos realizados con la interfaz gráfica de un SIG de escritorio son difícilmente reproducibles o repetibles.
@@ -36,8 +36,13 @@ Los enfoques basados en interfaces de líneas de comandos ofrecen ventajas mucho
 
 Los comandos se agrupan en programas, también llamados _scripts_ en inglés. Por ejemplo, la siguiente secuencia de comandos del lenguaje de programación R carga desde un archivo GeoJSON la capa de cantones de Costa Rica y filtra aquellos con área mayor o igual a 2000 km2:
 
+```{r eval=FALSE}
+# Instalación del paquete sf para manejo de datos vectoriales
+install.packages("sf")
+```
+
 ```{r message=FALSE, warning=FALSE}
-# Carga de paquete para manejo de datos vectoriales
+# Carga del paquete sf
 library(sf)
 
 # Lectura de la capa de cantones de un archivo GeoJSON
@@ -65,7 +70,7 @@ La función ```plot()``` despliega un mapa de los cantones seleccionados:
 plot(cantones_grandes["area"], axes = TRUE, graticule = TRUE)
 ```
 
-Otros lenguajes de programación permiten manejar datos geoespaciales de manera similar a R. Entre estos, destaca [Python](https://www.python.org/), un lenguaje de propósito general con un desarrollo muy activo en el área geoespacial. Otros lenguajes de importancia son [JavaScript](https://es.wikipedia.org/wiki/JavaScript), para desarrollo en la Web y [SQL](https://es.wikipedia.org/wiki/SQL), para bases de datos.
+Otros lenguajes de programación permiten manejar datos geoespaciales de manera similar a R. Entre estos, destaca [Python](https://www.python.org/), un lenguaje de propósito general con un desarrollo muy activo en el área geoespacial. Otros lenguajes de importancia en esta área son [JavaScript](https://es.wikipedia.org/wiki/JavaScript), para desarrollo en la Web y [SQL](https://es.wikipedia.org/wiki/SQL), para bases de datos.
 
 ## El lenguaje de programación R
 [R](https://www.r-project.org/) es un lenguaje de programación enfocado en análisis estadístico. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse [aprendizaje automático (_machine learning_)](https://en.wikipedia.org/wiki/Machine_learning), [ciencia de datos](https://en.wikipedia.org/wiki/Data_science) y [_big data_](https://en.wikipedia.org/wiki/Big_data), con aplicaciones en campos como biomedicina, bioinformática y finanzas, entre muchos otros. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993.
@@ -79,18 +84,69 @@ Algunas de las principales características de este lenguaje son:
 
 R es un proyecto de [software libre](https://en.wikipedia.org/wiki/Free_software) que se comparte mediante una licencia [GNU General Public Licence (GNU GPL)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.
 
-### Instalación de R y RStudio
-Para programar en R, puede utilizarse la interfaz de línea de comandos y también ambientes de desarrollo integrados (IDE, _integrated development environment_) como [Jupyter](https://jupyter.org/) o [RStudio](https://rstudio.com/), siendo este último el más utilizado y el que se empleará en este taller. Los instaladores pueden descargarse de:
-
-* [Instalador de R](https://cran.r-project.org/mirrors.html)
-* [Instalador de RStudio](https://www.rstudio.com/)
-
-**Debe instalarse primero R y luego RStudio**. Si lo desea, puede seguir la guía disponible en [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu - DataCamp](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu/).
-
 ### Sintaxis
-#### Funciones
-#### Tipos de datos
-### RMarkdown
+#### Funciones, bibliotecas y paquetes
+R, al igual que otros lenguajes de programación, estructura su funcionalidad por medio de segmentos de código llamados funciones. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático. Todas las funciones tienen un nombre y un conjunto de parámetros que especifican los datos de entrada que procesa la función. Los parámetros se escriben entre paréntesis redondos (```()```) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún parámetro. Si la función tiene varios parámetros, deben separarse mediante comas (```,```).
+
+Por ejemplo, la función ```print()``` recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza ```print()``` para imprimir la hilera ["Hola mundo"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program). Nótese el uso del símbolo ```#``` para comentarios (i.e. texto que no es código ejecutable).
+
+```{r}
+# Impresión de una hilera de carácteres
+print("Hola mundo")
+```
+
+La función  ```mean()``` retorna la media aritmética del parámetro de entrada. En el siguiente ejemplo, se calcula la media de los números de un vector creado a su vez con la función ```c()```.
+
+```{r}
+# Media aritmética
+mean(c(2, 4, 5, 9))
+```
+
+La función ```getwd()``` (_get working directory_) retorna la ruta del directorio de trabajo de la sesión actual de R. Este es el directorio en el cual R espera encontrar, por ejemplo, archivos de datos.
+
+```{r}
+# Consultar directorio de trabajo
+getwd()
+```
+
+La función ```setwd()``` (_set working directory_) establece la ruta del directorio de trabajo de la sesión actual de R. Como parámetro, recibe una hilera de texto con la ruta.
+
+```{r eval=FALSE}
+# Establecer directorio de trabajo (la ruta debe existir)
+setwd("c:/users/mfvargas")
+```
+
+Los parámetros de las funciones tienen nombres que pueden especificarse en caso de ser necesario. En el siguiente ejemplo, se utilizan los nombres de los parámetros ```x```, ```xlab``` y ```ylab``` de la función ```plot()``` para especificar la fuente de datos y las etiquetas de los ejes x e y de un gráfico.
+
+```{r}
+# Gráfico con etiquetas en los ejes x e y
+plot(
+  x=cars, 
+  xlab="Velocidad", 
+  ylab="Distancia"
+)
+```
+
+Para obtener ayuda de una función desde la línea de comandos de R, puede utilizarse un signo de pregunta (```?```) seguido del nombre de la función. Por ejemplo:
+
+```{r eval=FALSE}
+# Ayuda de la función setwd()
+?setwd
+```
+
+También puede obtenerse ayuda sobre una función en los buscadores de Internet (ej. Google), además de ejemplos y otros materiales de apoyo.
+
+Las funciones de R se agrupan en conjuntos llamados bibliotecas, las cuales se distribuyen en [paquetes](https://cran.r-project.org/web/packages/available_packages_by_name.html). Para utilizar un paquete, este debe instalarse primero con la función ```install.packages()``` y luego cargarse con la función ```library()```.
+
+```{r eval=FALSE}
+# Instalación del paquete sf (note las comillas)
+install.packages("rgdal")
+```
+
+```{r}
+# Carga del paquete sf
+library(rgdal)
+```
 
 ## El ecosistema geoespacial de R
 
