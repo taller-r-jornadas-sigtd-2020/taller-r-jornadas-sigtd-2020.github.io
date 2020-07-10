@@ -1597,7 +1597,7 @@ plot(cantones_grandes[&quot;area&quot;], axes = TRUE, graticule = TRUE)</code></
 <div id="funciones-bibliotecas-y-paquetes" class="section level4">
 <h4>Funciones, bibliotecas y paquetes</h4>
 <p>R, al igual que otros lenguajes de programación, estructura su funcionalidad por medio de segmentos de código llamados funciones. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático. Todas las funciones tienen un nombre y un conjunto de parámetros que especifican los datos de entrada que procesa la función. Los parámetros se escriben entre paréntesis redondos (<code>()</code>) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún parámetro. Si la función tiene varios parámetros, deben separarse mediante comas (<code>,</code>).</p>
-<p>Por ejemplo, la función <code>print()</code> recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza <code>print()</code> para imprimir la hilera <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">“Hola mundo”</a>. Nótese el uso del símbolo <code>#</code> para comentarios (i.e. texto que no es código ejecutable).</p>
+<p>Por ejemplo, la función <code>print()</code> recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza <code>print()</code> para imprimir la hilera <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">“Hola mundo”</a>.</p>
 <pre class="r"><code># Impresión de una hilera de carácteres
 print(&quot;Hola mundo&quot;)</code></pre>
 <pre><code>## [1] &quot;Hola mundo&quot;</code></pre>
@@ -1620,6 +1620,7 @@ plot(
   ylab=&quot;Distancia&quot;
 )</code></pre>
 <p><img src="data:image/png;base64,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" width="672" /></p>
+<p><strong>Nota</strong>: para efectos de pruebas y ejemplos, el interpretador de R incorpora varios conjuntos de datos en la forma de data frames que pueden listarse con la función <code>data()</code>. Para consultar un conjunto en particular, puede utilizarse el operador <code>?</code> desde la línea de comandos de R (ej. <code>?cars</code>).</p>
 <p>Para obtener ayuda de una función desde la línea de comandos de R, puede utilizarse un signo de pregunta (<code>?</code>) seguido del nombre de la función. Por ejemplo:</p>
 <pre class="r"><code># Ayuda de la función setwd()
 ?setwd</code></pre>
@@ -1640,6 +1641,149 @@ library(rgdal)</code></pre>
 ## Linking to sp version:1.4-1
 ## To mute warnings of possible GDAL/OSR exportToProj4() degradation,
 ## use options(&quot;rgdal_show_exportToProj4_warnings&quot;=&quot;none&quot;) before loading rgdal.</code></pre>
+</div>
+<div id="tipos-de-datos-objetos-y-variables" class="section level4">
+<h4>Tipos de datos, objetos y variables</h4>
+<p>R puede trabajar con varios tipos de datos, entre los que están números, carácteres (i.e. textos) y <em>booleanos</em> (o lógicos). También utiliza tipos más complejos, como vectores y matrices.</p>
+<p>Como se mencionó anteriormente, R es un lenguaje de programación orientado a objetos. Un objeto es una entidad que tiene asociadas propiedades y métodos para manipular esas propiedades. Un objeto puede ser, por ejemplo, un número, un texto, un vector o una matriz.</p>
+<p>Hay muchas formas de crear objetos en R. Una de las más sencillas es con los operadores de asignación. Estos son <code>=</code> y <code>&lt;-</code>. Las siguientes sentencias crean un número, un texto y un vector.</p>
+<pre class="r"><code># Número
+x &lt;- 10
+# Hilera de carácteres
+nombre &lt;- &#39;Manuel&#39;
+# Vector de hileras de carácteres
+dias &lt;- c(&#39;Domingo&#39;, &#39;Lunes&#39;, &#39;Martes&#39;, &#39;Miércoles&#39;, &#39;Jueves&#39;, &#39;Viernes&#39;, &#39;Sábado&#39;)</code></pre>
+<p>Tanto <code>x</code>, como <code>nombre</code> como <code>dias</code> son variables. Una variable es una etiqueta que se le asigna a un valor (o a un objeto). Una variable tiene un nombre que debe comenzar con una letra.</p>
+<p>El tipo de una variable (u objeto) puede consultarse con la función <code>typeof()</code>. Por ejemplo:</p>
+<pre class="r"><code>print(typeof(x))</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre class="r"><code>print(typeof(nombre))</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>A continuación, se describen con más detalle algunos de los tipos de datos utilizados en el lenguaje R.</p>
+<div id="números" class="section level5">
+<h5>Números</h5>
+<p>Pueden ser enteros o fracciones. Se utilizan en operaciones aritméticas (ej. suma, resta, multiplicación, división).</p>
+<pre class="r"><code># Números enteros
+x &lt;- 10
+y &lt;- 20
+# Suma
+print(x + y)</code></pre>
+<pre><code>## [1] 30</code></pre>
+<pre class="r"><code># Números decimales
+x &lt;- 0.5
+y &lt;- 3.14
+# Multiplicación
+print(x * y)</code></pre>
+<pre><code>## [1] 1.57</code></pre>
+</div>
+<div id="carácteres" class="section level5">
+<h5>Carácteres</h5>
+<p>Se utilizan para representar textos. Deben estar encerrados entre comillas simples <code>&#39;</code>o dobles <code>&quot;</code>.</p>
+<pre class="r"><code># Hileras de carácteres
+nombre &lt;- &quot;María&quot;
+apellido &lt;- &quot;Pérez&quot;
+# Concatenación
+print(paste(nombre, apellido))</code></pre>
+<pre><code>## [1] &quot;María Pérez&quot;</code></pre>
+</div>
+<div id="booleanos" class="section level5">
+<h5>Booleanos</h5>
+<p>Los objetos <em>booleanos</em> (también llamados lógicos) tienen dos posibles valores: verdadero (<code>TRUE</code>) o falso (<code>FALSE</code>).</p>
+<pre class="r"><code># Variable booleana
+b = 1 &lt; 2
+print(b)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Variable booleana
+c = 1 &gt; 2
+print(c)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Las expresiones booleanas pueden combinarse con operadores como:</p>
+<ul>
+<li><code>&amp;</code> (Y, en inglés <em>AND</em>)</li>
+<li><code>|</code> (O, en inglés <em>OR</em>)</li>
+<li><code>!</code> (NO, en inglés <em>NOT</em>)</li>
+</ul>
+<pre class="r"><code># Operador lógico AND
+print((1 &lt; 2) &amp; (3 &lt; 4))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Operador lógico OR
+print((2 + 2 == 5) | (20 &lt;= 10))</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># Operador lógico NOT
+print(!(2 + 2 == 5))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="vectores" class="section level5">
+<h5>Vectores</h5>
+<p>Un vector es una estructura de una dimensión que combina objetos del mismo tipo. Se crean con la función <code>c()</code> (del inglés <em>combine</em>), como en los siguientes ejemplos:</p>
+<pre class="r"><code># Definición de un vector de números
+a = c(1, 2, 3, 4, 5)
+print(a)</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code># Definición de un vector de hileras de carácteres
+b = c(&quot;Álvaro&quot;, &quot;Ana&quot;, &quot;Berta&quot;, &quot;Bernardo&quot;)
+print(b)</code></pre>
+<pre><code>## [1] &quot;Álvaro&quot;   &quot;Ana&quot;      &quot;Berta&quot;    &quot;Bernardo&quot;</code></pre>
+</div>
+<div id="data-frames" class="section level5">
+<h5>Data Frames</h5>
+<p>Los <em>data frames</em> son estructuras bidimensionales compuestas por varios vectores, de manera similar a una matriz. Cada vector corresponde una columna de la matriz.</p>
+<p>La función <code>data.frame()</code> puede utilizarse para crear un data frame a partir de vectores que serán las columnas del data frame.</p>
+<pre class="r"><code># Vector de nombres de países
+paises = c(&quot;PAN&quot;, &quot;CRI&quot;, &quot;NIC&quot;, &quot;SLV&quot;, &quot;HND&quot;, &quot;GTM&quot;, &quot;BLZ&quot;, &quot;DOM&quot;)
+# Vector de cantidades de habitantes (en millones)
+poblaciones = c(4.1, 5.0, 6.2, 6.4, 9.2, 16.9, 0.3, 10.6)
+# Creación de un data frame a partir de los dos vectores
+ca_poblacion_paises = data.frame(
+                        pais = paises, 
+                        poblacion = poblaciones
+                      )
+print(ca_poblacion_paises)</code></pre>
+<pre><code>##   pais poblacion
+## 1  PAN       4.1
+## 2  CRI       5.0
+## 3  NIC       6.2
+## 4  SLV       6.4
+## 5  HND       9.2
+## 6  GTM      16.9
+## 7  BLZ       0.3
+## 8  DOM      10.6</code></pre>
+<p>La función <code>summary()</code> proporciona un resumen de los contenidos de un data frame:</p>
+<pre class="r"><code># Resumen de los contenidos del data frame
+print(summary(ca_poblacion_paises))</code></pre>
+<pre><code>##       pais     poblacion     
+##  BLZ    :1   Min.   : 0.300  
+##  CRI    :1   1st Qu.: 4.775  
+##  DOM    :1   Median : 6.300  
+##  GTM    :1   Mean   : 7.338  
+##  HND    :1   3rd Qu.: 9.550  
+##  NIC    :1   Max.   :16.900  
+##  (Other):2</code></pre>
+</div>
+</div>
+<div id="importación-de-datos" class="section level4">
+<h4>Importación de datos</h4>
+<p>Por lo general, los datos con los que se trabaja en R provienen de fuentes externas, como archivos de texto, <a href="https://en.wikipedia.org/wiki/Database">bases de datos</a> o <a href="https://en.wikipedia.org/wiki/Web_service">servicios web</a>. A continuación, se estudiarán funciones que permiten importar datos desde algunas de estas fuentes.</p>
+<div id="la-función-read.csv" class="section level5">
+<h5>La función read.csv()</h5>
+<p>La función <code>read.csv()</code> importa datos desde un archivo de valores separados por comas (CSV, <em>comma separated values</em>) y los almacena en un data frame. Como parámetro, recibe la ruta del archivo. Si la ruta no es absoluta, se toma como relativa al directorio actual de trabajo.</p>
+<p>En el siguiente ejemplo, se usa la función <code>read.csv()</code> para importar los datos de casos de COVID-19 en Costa Rica. Los datos usados en este ejemplo están basados en los publicados por el <a href="http://geovision.uned.ac.cr/oges/">Ministerio de Salud de Costa Rica</a>.</p>
+<pre class="r"><code># Importación de casos de COVID-19 en Costa Rica
+covid19_general &lt;- read.csv(&quot;https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/covid19-general-20200709.csv&quot;)
+
+# Despliegue de los últimos registros
+covid19_general[120:126, 
+                c(&quot;FECHA&quot;, &quot;positivos&quot;, &quot;activos&quot;, &quot;RECUPERADOS&quot;, &quot;fallecidos&quot;)
+                ]</code></pre>
+<pre><code>##          FECHA positivos activos RECUPERADOS fallecidos
+## 120 03/07/2020      4311    2636        1657         18
+## 121 04/07/2020      4621    2882        1721         18
+## 122 05/07/2020      4996    3232        1745         19
+## 123 06/07/2020      5241    3452        1766         23
+## 124 07/07/2020      5486    3653        1810         23
+## 125 08/07/2020      5836    3883        1929         24
+## 126 09/07/2020      6485    4437        2023         25</code></pre>
+</div>
 </div>
 </div>
 </div>

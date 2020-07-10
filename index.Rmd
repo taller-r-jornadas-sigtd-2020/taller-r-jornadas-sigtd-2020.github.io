@@ -88,7 +88,7 @@ R es un proyecto de [software libre](https://en.wikipedia.org/wiki/Free_software
 #### Funciones, bibliotecas y paquetes
 R, al igual que otros lenguajes de programación, estructura su funcionalidad por medio de segmentos de código llamados funciones. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático. Todas las funciones tienen un nombre y un conjunto de parámetros que especifican los datos de entrada que procesa la función. Los parámetros se escriben entre paréntesis redondos (```()```) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún parámetro. Si la función tiene varios parámetros, deben separarse mediante comas (```,```).
 
-Por ejemplo, la función ```print()``` recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza ```print()``` para imprimir la hilera ["Hola mundo"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program). Nótese el uso del símbolo ```#``` para comentarios (i.e. texto que no es código ejecutable).
+Por ejemplo, la función ```print()``` recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza ```print()``` para imprimir la hilera ["Hola mundo"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program).
 
 ```{r}
 # Impresión de una hilera de carácteres
@@ -127,6 +127,8 @@ plot(
 )
 ```
 
+**Nota**: para efectos de pruebas y ejemplos, el interpretador de R incorpora varios conjuntos de datos en la forma de data frames que pueden listarse con la función ```data()```. Para consultar un conjunto en particular, puede utilizarse el operador  ```? ``` desde la línea de comandos de R (ej. ```?cars```).
+
 Para obtener ayuda de una función desde la línea de comandos de R, puede utilizarse un signo de pregunta (```?```) seguido del nombre de la función. Por ejemplo:
 
 ```{r eval=FALSE}
@@ -147,6 +149,160 @@ install.packages("rgdal")
 # Carga del paquete sf
 library(rgdal)
 ```
+
+#### Tipos de datos, objetos y variables
+R puede trabajar con varios tipos de datos, entre los que están números, carácteres (i.e. textos) y _booleanos_ (o lógicos). También utiliza tipos más complejos, como vectores y matrices.
+
+Como se mencionó anteriormente, R es un lenguaje de programación orientado a objetos. Un objeto es una entidad que tiene asociadas propiedades y métodos para manipular esas propiedades. Un objeto puede ser, por ejemplo, un número, un texto, un vector o una matriz.
+
+Hay muchas formas de crear objetos en R. Una de las más sencillas es con los operadores de asignación. Estos son ```=``` y ```<-```. Las siguientes sentencias crean un número, un texto y un vector.
+
+```{r}
+# Número
+x <- 10
+# Hilera de carácteres
+nombre <- 'Manuel'
+# Vector de hileras de carácteres
+dias <- c('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
+```
+
+Tanto ```x```, como ```nombre``` como ```dias``` son variables. Una variable es una etiqueta que se le asigna a un valor (o a un objeto). Una variable tiene un nombre que debe comenzar con una letra.
+
+El tipo de una variable (u objeto) puede consultarse con la función ```typeof()```. Por ejemplo:
+
+```{r}
+print(typeof(x))
+```
+
+```{r}
+print(typeof(nombre))
+```
+
+A continuación, se describen con más detalle algunos de los tipos de datos utilizados en el lenguaje R.
+
+##### Números
+Pueden ser enteros o fracciones. Se utilizan en operaciones aritméticas (ej. suma, resta, multiplicación, división).
+
+```{r}
+# Números enteros
+x <- 10
+y <- 20
+# Suma
+print(x + y)
+```
+
+```{r}
+# Números decimales
+x <- 0.5
+y <- 3.14
+# Multiplicación
+print(x * y)
+```
+
+##### Carácteres
+Se utilizan para representar textos. Deben estar encerrados entre comillas simples ```'```o dobles ```"```.
+
+```{r}
+# Hileras de carácteres
+nombre <- "María"
+apellido <- "Pérez"
+# Concatenación
+print(paste(nombre, apellido))
+```
+
+##### Booleanos
+Los objetos _booleanos_ (también llamados lógicos) tienen dos posibles valores: verdadero (```TRUE```) o falso (```FALSE```).
+
+```{r}
+# Variable booleana
+b = 1 < 2
+print(b)
+```
+
+```{r}
+# Variable booleana
+c = 1 > 2
+print(c)
+```
+
+Las expresiones booleanas pueden combinarse con operadores como: 
+
+* ```&``` (Y, en inglés _AND_)
+* ```|``` (O, en inglés _OR_)
+* ```!``` (NO, en inglés _NOT_)
+
+```{r}
+# Operador lógico AND
+print((1 < 2) & (3 < 4))
+```
+
+```{r}
+# Operador lógico OR
+print((2 + 2 == 5) | (20 <= 10))
+```
+
+```{r}
+# Operador lógico NOT
+print(!(2 + 2 == 5))
+```
+
+##### Vectores
+Un vector es una estructura de una dimensión que combina objetos del mismo tipo. Se crean con la función ```c()``` (del inglés _combine_), como en los siguientes ejemplos:
+
+```{r}
+# Definición de un vector de números
+a = c(1, 2, 3, 4, 5)
+print(a)
+```
+
+```{r}
+# Definición de un vector de hileras de carácteres
+b = c("Álvaro", "Ana", "Berta", "Bernardo")
+print(b)
+```
+
+##### Data Frames
+Los _data frames_ son estructuras bidimensionales compuestas por varios vectores, de manera similar a una matriz. Cada vector corresponde una columna de la matriz.
+
+La función ```data.frame()``` puede utilizarse para crear un data frame a partir de vectores que serán las columnas del data frame.
+
+```{r}
+# Vector de nombres de países
+paises = c("PAN", "CRI", "NIC", "SLV", "HND", "GTM", "BLZ", "DOM")
+# Vector de cantidades de habitantes (en millones)
+poblaciones = c(4.1, 5.0, 6.2, 6.4, 9.2, 16.9, 0.3, 10.6)
+# Creación de un data frame a partir de los dos vectores
+ca_poblacion_paises = data.frame(
+                        pais = paises, 
+                        poblacion = poblaciones
+                      )
+print(ca_poblacion_paises)
+```
+
+La función ```summary()``` proporciona un resumen de los contenidos de un data frame:
+```{r}
+# Resumen de los contenidos del data frame
+print(summary(ca_poblacion_paises))
+```
+
+#### Importación de datos
+Por lo general, los datos con los que se trabaja en R provienen de fuentes externas, como archivos de texto, [bases de datos](https://en.wikipedia.org/wiki/Database) o [servicios web](https://en.wikipedia.org/wiki/Web_service). A continuación, se estudiarán funciones que permiten importar datos desde algunas de estas fuentes.
+
+##### La función read.csv()
+La función ```read.csv()``` importa datos desde un archivo de valores separados por comas (CSV, _comma separated values_) y los almacena en un data frame. Como parámetro, recibe la ruta del archivo. Si la ruta no es absoluta, se toma como relativa al directorio actual de trabajo.
+
+En el siguiente ejemplo, se usa la función ```read.csv()``` para importar los datos de casos de COVID-19 en Costa Rica. Los datos usados en este ejemplo están basados en los publicados por el [Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/).
+
+```{r}
+# Importación de casos de COVID-19 en Costa Rica
+covid19_general <- read.csv("https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/covid19-general-20200709.csv")
+
+# Despliegue de los últimos registros
+covid19_general[120:126, 
+                c("FECHA", "positivos", "activos", "RECUPERADOS", "fallecidos")
+                ]
+```
+
 
 ## El ecosistema geoespacial de R
 
