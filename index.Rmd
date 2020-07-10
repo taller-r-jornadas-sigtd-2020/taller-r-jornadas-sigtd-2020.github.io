@@ -572,7 +572,7 @@ leaflet() %>%
 * Sitio web del lenguaje de programación R: [The R Project for Statistical Computing](https://www.r-project.org/)
 * Sitio web del entorno de desarrollo RStudio: [RStudio | Open source & professional software for data science teams](https://rstudio.com/)
 
-### Sitiow web de paquetes de R
+### Sitios web de paquetes de R
 * Sitio web del paquete sf de R: [Simple Features for R - sf](https://r-spatial.github.io/sf/)
 * Sitio web del paquete raster de R: [Raster data manipulation - R](https://rspatial.org/raster/spatial/8-rastermanip.html)
 * Sitio web del paquete Plotly para R: [Plotly R Open Source Graphing Library](https://plotly.com/r/)
