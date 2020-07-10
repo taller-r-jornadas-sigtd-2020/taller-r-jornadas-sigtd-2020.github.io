@@ -22,7 +22,7 @@ Este sitio web contiene los materiales del taller "Manejo de datos geográficos 
 El sitio contiene tanto las explicaciones teóricas como el código fuente en R que las ejemplifica y los enlaces a los datos utilizados. Todo los recursos están disponibles en [https://github.com/taller-r-jornadas-sigtd-2020](https://github.com/taller-r-jornadas-sigtd-2020).
 
 ## ¡Antes de empezar!
-Para reproducir los ejemplos en lenguaje R de este taller, primero debe instalar los programas R y RStudio, disponibles en los siguientes enlaces:
+Para reproducir los ejemplos en lenguaje R de este taller, primero debe descargar y ejecutar los instaladores de R y RStudio, disponibles en los siguientes enlaces:
 
 * [Instalador de R](https://cloud.r-project.org/). **Nota importante**: a la fecha de escritura de este documento ya está disponible la versión 4 de R. Sin embargo, los ejemplos de este taller se probaron con la [versión 3.6.3 para Windows](https://cran.r-project.org/bin/windows/base/old/3.6.3/R-3.6.3-win.exe).
 * [Instalador de RStudio](https://rstudio.com/products/rstudio/download/#download).
@@ -46,28 +46,28 @@ install.packages("sf")
 library(sf)
 
 # Lectura de la capa de cantones de un archivo GeoJSON
-cantones <-
+sf_cantones <-
   st_read(
           "https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/cantones.geojson", 
           quiet = T
 )
 
 # Filtro de los cantones "grandes" (area >= 2000)
-cantones_grandes <- cantones[cantones$area >= 2000, ]
+sf_cantones_grandes <- sf_cantones[sf_cantones$area >= 2000, ]
 ```
 
 Note el uso del símbolo ```#``` para realizar "comentarios" en el [código fuente](https://es.wikipedia.org/wiki/C%C3%B3digo_fuente) del programa.
 
 El siguiente comando lista los cantones seleccionados:
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, collapse=TRUE}
 # Despliegue de los nombres y de las áreas de los cantones grandes
-cantones_grandes[, c("canton", "area"), drop = TRUE]
+sf_cantones_grandes[, c("canton", "area"), drop = TRUE]
 ```
 
 La función ```plot()``` despliega un mapa de los cantones seleccionados:
 ```{r message=FALSE, warning=FALSE}
 # Mapeo de los cantones grandes
-plot(cantones_grandes["area"], axes = TRUE, graticule = TRUE)
+plot(sf_cantones_grandes["area"], axes = TRUE, graticule = TRUE)
 ```
 
 Otros lenguajes de programación permiten manejar datos geoespaciales de manera similar a R. Entre estos, destaca [Python](https://www.python.org/), un lenguaje de propósito general con un desarrollo muy activo en el área geoespacial. Otros lenguajes de importancia en esta área son [JavaScript](https://es.wikipedia.org/wiki/JavaScript), para desarrollo en la Web y [SQL](https://es.wikipedia.org/wiki/SQL), para bases de datos.
@@ -85,26 +85,28 @@ Algunas de las principales características de este lenguaje son:
 R es un proyecto de [software libre](https://en.wikipedia.org/wiki/Free_software) que se comparte mediante una licencia [GNU General Public Licence (GNU GPL)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.
 
 ### Sintaxis
-#### Funciones, bibliotecas y paquetes
+#### Funciones y paquetes
+
+##### Funciones
 R, al igual que otros lenguajes de programación, estructura su funcionalidad por medio de segmentos de código llamados funciones. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático. Todas las funciones tienen un nombre y un conjunto de parámetros que especifican los datos de entrada que procesa la función. Los parámetros se escriben entre paréntesis redondos (```()```) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún parámetro. Si la función tiene varios parámetros, deben separarse mediante comas (```,```).
 
 Por ejemplo, la función ```print()``` recibe como parámetro un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza ```print()``` para imprimir la hilera ["Hola mundo"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program).
 
-```{r}
+```{r collapse=TRUE}
 # Impresión de una hilera de carácteres
 print("Hola mundo")
 ```
 
 La función  ```mean()``` retorna la media aritmética del parámetro de entrada. En el siguiente ejemplo, se calcula la media de los números de un vector creado a su vez con la función ```c()```.
 
-```{r}
+```{r collapse=TRUE}
 # Media aritmética
 mean(c(2, 4, 5, 9))
 ```
 
 La función ```getwd()``` (_get working directory_) retorna la ruta del directorio de trabajo de la sesión actual de R. Este es el directorio en el cual R espera encontrar, por ejemplo, archivos de datos.
 
-```{r}
+```{r collapse=TRUE}
 # Consultar directorio de trabajo
 getwd()
 ```
@@ -138,26 +140,28 @@ Para obtener ayuda de una función desde la línea de comandos de R, puede utili
 
 También puede obtenerse ayuda sobre una función en los buscadores de Internet (ej. Google), además de ejemplos y otros materiales de apoyo.
 
-Las funciones de R se agrupan en conjuntos llamados bibliotecas, las cuales se distribuyen en [paquetes](https://cran.r-project.org/web/packages/available_packages_by_name.html). Para utilizar un paquete, este debe instalarse primero con la función ```install.packages()``` y luego cargarse con la función ```library()```.
+##### Paquetes
+Las funciones de R se agrupan en conjuntos llamados bibliotecas, las cuales se distribuyen en [paquetes](https://cran.r-project.org/web/packages/available_packages_by_name.html). Para utilizar un paquete, este debe instalarse primero con la función ```install.packages()``` y luego cargarse con la función ```library()```. Por ejemplo:
 
 ```{r eval=FALSE}
-# Instalación del paquete sf (note las comillas)
+# Instalación del paquete rgdal (note las comillas)
 install.packages("rgdal")
 ```
 
 ```{r message=FALSE, warning=FALSE}
-# Carga del paquete sf
+# Carga del paquete rgdal
 library(rgdal)
 ```
 
 #### Tipos de datos, objetos y variables
+
 R puede trabajar con varios tipos de datos, entre los que están números, carácteres (i.e. textos) y _booleanos_ (o lógicos). También utiliza tipos más complejos, como vectores y matrices.
 
 Como se mencionó anteriormente, R es un lenguaje de programación orientado a objetos. Un objeto es una entidad que tiene asociadas propiedades y métodos para manipular esas propiedades. Un objeto puede ser, por ejemplo, un número, un texto, un vector o una matriz.
 
 Hay muchas formas de crear objetos en R. Una de las más sencillas es con los operadores de asignación. Estos son ```=``` y ```<-```. Las siguientes sentencias crean un número, un texto y un vector.
 
-```{r}
+```{r collapse=TRUE}
 # Número
 x <- 10
 
@@ -172,7 +176,7 @@ Tanto ```x```, como ```nombre``` como ```dias``` son variables. Una variable es 
 
 El tipo de una variable (u objeto) puede consultarse con la función ```typeof()```. Por ejemplo:
 
-```{r}
+```{r collapse=TRUE}
 typeof(x)
 typeof(nombre)
 ```
@@ -182,7 +186,7 @@ A continuación, se describen con más detalle algunos de los tipos de datos uti
 ##### Números
 Pueden ser enteros o fracciones. Se utilizan en operaciones aritméticas (ej. suma, resta, multiplicación, división).
 
-```{r}
+```{r collapse=TRUE}
 # Números enteros
 x <- 10
 y <- 20
@@ -191,7 +195,7 @@ y <- 20
 x + y
 ```
 
-```{r}
+```{r collapse=TRUE}
 # Números decimales
 x <- 0.5
 y <- 3.14
@@ -203,7 +207,7 @@ x * y
 ##### Carácteres
 Se utilizan para representar textos. Deben estar encerrados entre comillas simples ```'```o dobles ```"```.
 
-```{r}
+```{r collapse=TRUE}
 # Hileras de carácteres
 nombre <- "María"
 apellido <- "Pérez"
@@ -215,14 +219,14 @@ paste(nombre, apellido)
 ##### Booleanos
 Los objetos _booleanos_ (también llamados lógicos) tienen dos posibles valores: verdadero (```TRUE```) o falso (```FALSE```).
 
-```{r}
+```{r collapse=TRUE}
 # Variable booleana
 b = 1 < 2
 
 b
 ```
 
-```{r}
+```{r collapse=TRUE}
 # Variable booleana
 c = 1 > 2
 
@@ -235,17 +239,17 @@ Las expresiones booleanas pueden combinarse con operadores como:
 * ```|``` (O, en inglés _OR_)
 * ```!``` (NO, en inglés _NOT_)
 
-```{r}
+```{r collapse=TRUE}
 # Operador lógico AND
 (1 < 2) & (3 < 4)
 ```
 
-```{r}
+```{r collapse=TRUE}
 # Operador lógico OR
 (2 + 2 == 5) | (20 <= 10)
 ```
 
-```{r}
+```{r collapse=TRUE}
 # Operador lógico NOT
 !(2 + 2 == 5)
 ```
@@ -253,16 +257,17 @@ Las expresiones booleanas pueden combinarse con operadores como:
 ##### Vectores
 Un vector es una estructura de una dimensión que combina objetos del mismo tipo. Se crean con la función ```c()``` (del inglés _combine_), como en los siguientes ejemplos:
 
-```{r}
+```{r collapse=TRUE}
 # Definición de un vector de números
 a = c(1, 2, 3, 4, 5)
 
 a
 ```
 
-```{r}
+```{r collapse=TRUE}
 # Definición de un vector de hileras de carácteres
 b = c("Álvaro", "Ana", "Berta", "Bernardo")
+
 b
 ```
 
@@ -271,7 +276,7 @@ Los _data frames_ son estructuras bidimensionales compuestas por varios vectores
 
 La función ```data.frame()``` puede utilizarse para crear un data frame a partir de vectores que serán las columnas del data frame.
 
-```{r}
+```{r collapse=TRUE}
 # Vector de nombres de países
 paises = c("PAN", "CRI", "NIC", "SLV", "HND", "GTM", "BLZ", "DOM")
 
@@ -288,7 +293,7 @@ df_paises_poblaciones
 ```
 
 La función ```summary()``` proporciona un resumen de los contenidos de un data frame:
-```{r}
+```{r collapse=TRUE}
 # Resumen de los contenidos del data frame
 summary(df_paises_poblaciones)
 ```
@@ -301,7 +306,7 @@ La función ```read.csv()``` importa datos desde un archivo de valores separados
 
 En el siguiente ejemplo, se usa la función ```read.csv()``` para importar los datos de casos de COVID-19 en Costa Rica. Los datos usados en este ejemplo están basados en los publicados por el [Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/).
 
-```{r}
+```{r collapse=TRUE}
 # Importación de casos de COVID-19 en Costa Rica
 df_covid19_general <- 
   read.csv(
@@ -315,7 +320,6 @@ df_covid19_general[120:126,
 ```
 
 ### Graficación
-
 Una de las principales fortalezas de R es su capacidad para generar gráficos estadísticos. Uno de los varios paquetes especializados en este tipo de funciones es [plotly](https://plotly.com/r/).
 
 ```{r eval=FALSE}
@@ -358,25 +362,222 @@ plot_ly(data = df_covid19_general,
 ```
 
 ## El ecosistema geoespacial de R
+La comunidad de programadores de R ha desarrollado un conjunto de paquetes para el manejo de datos geoespaciales, tanto en formatos vectoriales como raster. Algunos de los principales de estos paquetes son:
+
+* El paquete [sf](https://r-spatial.github.io/sf/) de R. Ofrece un conjunto de funciones para el manejo de datos vectoriales, de acuerdo con el estándar [Simple Features](https://www.ogc.org/standards/sfa).
+
+* El paquete [raster](https://rspatial.org/raster/spatial/8-rastermanip.html) de R. Ofrece un conjunto de funciones para el manejo de datos raster.
+
+* El paquete [Leaflet para R](https://rstudio.github.io/leaflet/). Es una implementación en R de la biblioteca [Leaflet para el lenguaje JavaScript](https://leafletjs.com/) para la programación de mapas interactivos en páginas web.
 
 ### Datos vectoriales
+
+#### El modelo vectorial de datos
+El modelo vectorial de datos está basado en puntos localizados en un [sistema de referencia de coordenadas (CRS)](https://en.wikipedia.org/wiki/Spatial_reference_system). Los puntos individuales pueden representar objetos independientes (ej. la localización de un poste eléctrico o de una cabina telefónica) o pueden también agruparse para formar geometrías más complejas como líneas o polígonos. Por lo general, los puntos tienen solo dos dimensiones (x, y), a las que se les puede agregar una tercera dimensión _z_, usualmente correspondiente a la altitud sobre el nivel del mar.
+
+#### El estándar _Simple Features_
+[_Simple Features_](https://www.ogc.org/standards/sfa) (o _Simple Feature Access_) es un estándar abierto de la [Organización Internacional de Estandarización (ISO)](https://iso.org/) y del [_Open Geospatial Consortium_ (OGC)](https://www.ogc.org/) que especifica un modelo común de almacenamiento y acceso para geometrías de dos dimensiones (líneas, polígonos, multilíneas, multipolígonos, etc.). El estándar es implementado por muchas bibliotecas y bases de datos geoespaciales como [sf](https://cran.r-project.org/web/packages/sf/index.html), [GDAL](https://gdal.org/), [PostgreSQL/PostGIS](https://en.wikipedia.org/wiki/PostGIS), [SQLite/SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite/), [Oracle Spatial](https://www.oracle.com/database/technologies/spatialandgraph.html) y [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), entre muchas otras.
+
+La especificación define 17 tipos de geometrías, de las cuales siete son las más comúnmente utilizadas. Estas últimas se muestran en la siguiente figura:
+
+![Tipos de geometrías de Simple Features más usadas. Imagen de Robin Lovelace et al. (https://geocompr.robinlovelace.net/spatial-class.html#vector-data)](img/sf_types.png)
+
+#### El paquete sf
+El paquete [sf](https://r-spatial.github.io/sf/) (de _Simple Features_) de R implementa los modelos de datos de las geometrías de tipo vectorial: puntos, líneas, polígonos, sus versiones múltiples y las colecciones de geometrías. Está basado en bibliotecas de sofware ampliamente utilizadas en aplicaciones geoespaciales:
+
+* **GDAL**: [Geospatial Data Abstraction Library (GDAL)](https://gdal.org/) es una biblioteca para leer y escribir datos geoespaciales en varios formatos [raster](https://gdal.org/drivers/raster/) y [vectoriales](https://gdal.org/drivers/vector/). Implementa un único [modelo abstracto de datos raster](https://gdal.org/user/raster_data_model.html) y un único [modelo abstracto de datos vectoriales](https://gdal.org/user/vector_data_model.html), lo que permite programar aplicaciones geoespaciales sin tener que ocuparse de las particularidades de cada formato que se utilice (GeoTIFF, NetCDF, ESRI Shapefile, GeoJSON, etc.). A pesar de que GDAL está programada en C/C++, cuenta con una interfaz de programación de aplicaciones (API) para varios lenguajes de programación, incluyendo [C](https://gdal.org/api/index.html#c-api), [C++](https://gdal.org/api/index.html#id3), [Python](https://gdal.org/python/index.html) y [Java](https://gdal.org/java/overview-summary.html). Además, ofrece un conjunto de [utilitarios de línea de comandos](https://gdal.org/programs/) cuyas [distribuciones binarias](https://gdal.org/download.html#binaries) están disponibles para varios sistemas operativos, incluyendo Windows, macOS y Linux.
+* **GEOS**: [Geometry Engine, Open Source (GEOS)](https://trac.osgeo.org/geos) es una implmentación en C++ de la biblioteca [JTS Topology Suite](http://www.tsusiatsoftware.net/jts/main.html) (desarrollada en Java) y que implementa un conjunto de operaciones y predicados geoespaciales (ej. unión, intersección, distancia, área).
+* **PROJ**: [PROJ](https://proj.org/) es una biblioteca que transforma coordenadas entre diferentes CRS, incluyendo tanto proyecciones cartográficas como transformaciones geodésicas.
+
+sf provee acceso, desde un mismo paquete de R, a la funcionalidad de estas tres bibliotecas, proporcionando así una interfaz unificada para leer y escribir datos geoespaciales mediante GDAL, realizar operaciones con geometrías mediante GEOS y efectuar transformaciones entre sistemas de coordenadas mediante PROJ.
+
+En sf, los conjuntos de datos geoespaciales se almacenan en un data frame que contiene una columna especial para las geometrías. Esta columna se denomina generalmente ```geom``` o ```geometry```. El manejo de datos geoespaciales como data frames, permite manipularlos con las funciones ya desarrolladas para data frames (ej. ```summary()```, ```View()```, ```str()```) y con la misma forma de referencias las filas (observaciones) y las columnas (variables).
+
+En el siguiente ejemplo. se cargan en un objeto sf los datos de casos activos de COVID-19 en los cantones de Costa Rica. Para procesar y transformar los datos, se utilizan los paquetes [dplyr](https://dplyr.tidyverse.org/) y [tidyr](https://tidyr.tidyverse.org/), ambos parte de [Tidyverse](https://www.tidyverse.org/), una colección de paquetes de R especializados en [ciencia de datos](https://es.wikipedia.org/wiki/Ciencia_de_datos).
+
+```{r eval=FALSE}
+# Instalación de dplyr y tidyr
+install.packages("dplyr")
+install.packages("tidyr")
+```
+
+```{r warning=FALSE, message=FALSE}
+library(tidyr)
+library(dplyr)
+
+# Data frame de casos activos por cantón, con fechas en las columnas
+df_activos_cantones_ancho <- 
+  read.csv(
+    "https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/covid19-activos-cantones-20200709.csv"
+    )
+
+# Data frame con fechas en las filas
+df_activos_cantones <-
+  df_activos_cantones_ancho %>%
+  pivot_longer(
+    cols = c(-cod_provin, -provincia, -cod_canton, -canton), 
+    names_to = "fecha", 
+    values_to = "activos"
+  )
+
+# Cambio de tipo de la columna "fecha"
+df_activos_cantones$fecha <- as.Date(df_activos_cantones$fecha, "X%d.%m.%Y")
+
+# Data frame de casos activos por cantón en la última fecha
+df_activos_cantones_ultima_fecha <- 
+  df_activos_cantones %>%
+  filter(fecha == max(fecha, na.rm = TRUE)) %>%
+  select(cod_canton, activos)
+
+# Objeto sf de casos activos en cantones en la última fecha
+sf_activos_cantones_ultima_fecha <-
+  left_join(sf_cantones, df_activos_cantones_ultima_fecha, by = c('cod_canton')) %>%
+  arrange(desc(activos))
+
+# Mapeo de los casos activos
+plot(sf_activos_cantones_ultima_fecha["activos"], 
+     breaks = "jenks",
+     axes = TRUE,
+     graticule = TRUE
+     )
+```
+
+
+En el siguiente ejemplo, se despliega el mapa mediante [Leaflet](https://rstudio.github.io/leaflet/), un paquete para generar mapas web.
+
+```{r eval=FALSE}
+# Instalación de Leaflet
+install.packages("leaflet")
+```
+
+```{r warning=FALSE, message=FALSE}
+library(leaflet)
+
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+paleta_azul <- colorBin("YlOrRd", domain = sf_activos_cantones_ultima_fecha$activos, bins = bins)
+
+leaflet(sf_activos_cantones_ultima_fecha) %>% 
+  fitBounds(lng1 = -86, lng2 = -82, lat1 = 8, lat2 = 11) %>%
+  addProviderTiles(providers$OpenStreetMap.Mapnik, group = "OpenStreetMap") %>%
+  addPolygons(fillColor = ~paleta_azul(activos), stroke=T, fillOpacity = 1,
+              color="black", weight=0.2, opacity= 0.5,
+              group = "Cantones",
+              popup = paste("Provincia: ", sf_activos_cantones_ultima_fecha$provincia, "<br>",
+                            "Cantón: ", sf_activos_cantones_ultima_fecha$canton, "<br>",
+                            "activos: ", sf_activos_cantones_ultima_fecha$activos
+                            )
+  ) %>%
+  addLegend("bottomright", pal = paleta_azul, values = ~activos,
+    title = "Casos activos",
+    opacity = 1
+  ) %>%  
+  addLayersControl(
+    baseGroups = c("OpenStreetMap"),
+    overlayGroups = c("Cantones"),
+    options = layersControlOptions(collapsed = TRUE)    
+  ) %>%  
+  addMiniMap(
+    toggleDisplay = TRUE,
+    position = "bottomleft",
+    tiles = providers$OpenStreetMap.Mapnik
+  )
+```
+
 ### Datos raster
 
+#### El modelo de datos raster
+El modelo de datos raster usualmente consiste de un encabezado y de una matriz con celdas (también llamadas pixeles) de un mismo tamaño. El encabezado define el [sistema de referencia de coordenadas (CRS)](https://en.wikipedia.org/wiki/Spatial_reference_system), la extensión y el punto de origen de una capa raster. Por lo general, el origen se ubica en la esquina inferior izquierda o en la esquina superior izquierda de la matriz. La extensión se define mediante el número de filas, el número de columnas y el tamaño (resolución) de la celda.
+
+Cada celda tiene una identificación (ID) y almacena un único valor, el cual puede ser numérico o categórico, como se muestra en la figura siguiente. 
+
+![El modelo raster: (A) ID de las celdas, (B) valores de las celdas, (C) mapa raster de colores. Imagen de Robin Lovelace et al. (https://geocompr.robinlovelace.net/spatial-class.html#raster-data)](img/modelo_raster.png)
+
+A diferencia del modelo vectorial, el modelo raster no necesita almacenar todas las coordenadas de cada geometría (i.e. las esquinas de las celdas), debido a que la ubicación de cada celda puede calcularse a partir de la información contenida en el encabezado. Esta simplicidad, en conjunto con el [álgebra de mapas](https://en.wikipedia.org/wiki/Map_algebra), permiten que el procesamiento de datos raster sea mucho más eficiente que el procesamiento de datos vectoriales. Por otra parte, el modelo vectorial es mucho más flexible en cuanto a las posibilidades de representación de geometrías y almacenamiento de valores, por medio de múltiples elementos de datos.
+
+Los mapas raster generalmente almacenan fenómenos continuos como elevación, precipitación, temperatura, densidad de población y datos espectrales. También es posible representar mediante raster datos discretos, tales como tipos de suelo o clases de cobertura de la tierra, como se muestra en la figura que se muestra a continuación.
+
+![Ejemplos de mapas raster continuos y categóricos. Imagen de Robin Lovelace et al. (https://geocompr.robinlovelace.net/spatial-class.html#raster-data)](img/raster_continuo_categorico.png)
+
+#### El paquete raster
+El paquete [raster](https://cran.r-project.org/web/packages/raster/) proporciona funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster. El paquete raster utiliza el paquete [rgdal](https://cran.r-project.org/web/packages/rgdal/), el cual proporciona enlaces a las bibliotecas [GDAL](https://gdal.org/) y [PROJ](https://proj.org/).
+
+```{r eval = F}
+# Instalación del paquete raster
+install.packages("raster")
+
+# Instalación del paquete rgdal
+install.packages("rgdal")
+```
+
+```{r warning=FALSE, message=FALSE}
+library(raster)
+
+# Directorio de trabajo (DEBE USARSE UN DIRECTORIO EXISTENTE EN EL DISCO)
+setwd("c:/users/mfvargas/")
+
+# Datos de altitud
+altitude <- getData("worldclim", var="alt", res=.5, lon=-84, lat=10)
+
+# Datos de altitud recortados para los límites aproximados de Costa Rica
+cr_altitude <- 
+  altitude %>%
+  crop(sf_cantones) %>%
+  mask(sf_cantones)
+
+# Resumen de información básica de la capa raster
+cr_altitude
+
+# Mapeo
+plot(cr_altitude, ext=extent(-86, -82.3, 8, 11.3))
+```
+
+Ejemplo de mapa en Leaflet
+```{r warning=FALSE, message=FALSE}
+# Paleta de colores
+pal <- colorNumeric(
+  #c("#0C2C84", "#41B6C4", "#FFFFCC"), 
+  "YlGnBu",
+  values(cr_altitude), 
+  na.color = "transparent"
+)
+# Mapa web
+leaflet() %>% 
+  fitBounds(lng1 = -86, lng2 = -82.3, lat1 = 8, lat2 = 11.3) %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes de ESRI") %>% 
+  addProviderTiles(providers$Stamen.TonerLite, group = "Stamen Toner Lite") %>%
+  addProviderTiles(providers$OpenStreetMap.Mapnik, group = "OpenStreetMap") %>%
+  addRasterImage(cr_altitude, 
+                 colors = pal, 
+                 opacity = 0.8, 
+                 group = "Altitud"
+  ) %>%
+  addLayersControl(
+    baseGroups = c("OpenStreetMap", "Stamen Toner Lite", "Imágenes de ESRI"),
+    overlayGroups = c("Altitud"),
+    options = layersControlOptions(collapsed = FALSE)    
+  ) %>%
+  addLegend(pal = pal, 
+            values = values(cr_altitude), 
+            title = "Altitud"
+  ) %>%
+  addMiniMap(
+    toggleDisplay = TRUE,
+    position = "bottomleft",
+    tiles = providers$Stamen.TonerLite
+  )
+```
+
 ## Recursos recomendados
-### R y RStudio
+### Sitios web de R y RStudio
 * Sitio web del lenguaje de programación R: [The R Project for Statistical Computing](https://www.r-project.org/)
 * Sitio web del entorno de desarrollo RStudio: [RStudio | Open source & professional software for data science teams](https://rstudio.com/)
 
-### Paquetes de R
+### Sitiow web de paquetes de R
 * Sitio web del paquete sf de R: [Simple Features for R - sf](https://r-spatial.github.io/sf/)
 * Sitio web del paquete raster de R: [Raster data manipulation - R](https://rspatial.org/raster/spatial/8-rastermanip.html)
-* Sitio web del paquete flexdashboard de R: [flexdashboard: Easy interactive dashboards for R](https://rmarkdown.rstudio.com/flexdashboard/)
-* Sitio web del paquete Leaflet para R: [Leaflet for R](https://rstudio.github.io/leaflet/)
 * Sitio web del paquete Plotly para R: [Plotly R Open Source Graphing Library](https://plotly.com/r/)
 * Sitio web del paquete DT para R: [DT: An R interface to the DataTables library](https://rstudio.github.io/DT/)
-
-### Git
-* Sitio web del sistema Git para control de versiones: [Git](https://git-scm.com/)
+* Sitio web del paquete Leaflet para R: [Leaflet for R](https://rstudio.github.io/leaflet/)
 
 ### Libros
 * Libro "Geocomputation with R", de Lovelace et al.: [Geocomputation with R](https://geocompr.robinlovelace.net/)
