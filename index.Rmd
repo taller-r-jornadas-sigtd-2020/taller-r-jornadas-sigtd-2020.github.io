@@ -17,12 +17,42 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](img/Taller-7-01.png)
 
 ## Presentación
-Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", el cual forma parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
+Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", el cual es parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
 
-El sitio contiene tanto las explicaciones teóricas como el código fuente que las ejemplifica, junto con los enlaces a los datos utilizados.
+El sitio contiene tanto las explicaciones teóricas como el código fuente en R que las ejemplifica y los enlaces a los datos utilizados.
 
 ## Introducción
-El procesamiento de datos geográficos mediante programas es una alternativa y un complemento al enfoque de procesamiento basado en aplicaciones SIG de escritorio (ej. ArcGIS, QGIS). Entre sus ventajas, pueden mencionarse su flexibilidad y reproducibilidad.
+Durante las últimas décadas, las aplicaciones SIG de escritorio (ej. ArcGIS, QGIS) han sido la forma más popular de procesamiento de datos geográficos mediante computadoras. Estas aplicaciones están basadas en una interfaz gráfica a la que el usuario accede mediante menús, botones, íconos y otros elementos similares. A pesar de sus ventajas, entre las que pueden destacarse su facilidad de uso y rápida curva de aprendizaje, los procesos realizados con la interfaz gráfica de un SIG de escritorio son difícilmente reproducibles o repetibles.
+
+Los enfoques basados en interfaces de líneas de comandos ofrecen ventajas mucho mayores en cuanto a reproductibilidad que los basados en interfaces gráficas. Una investigación reproducible es aquella que puede ser realizada de nuevo por personas diferentes a su autor, de manera tal que puedan obtener los resultados originales al seguir la misma metodología. Por lo general, la reproductibilidad requiere que tanto los comandos como los datos utilizados estén disponibles para quienes deseen utilizarlos.
+
+Los comandos se agrupan en programas, también llamados _scripts_ en inglés. Por ejemplo, la siguiente secuencia de comandos en el lenguaje de programación R carga la capa de cantones de Costa Rica, filtra aquellos con área mayor o igual a 2000 km2, lista los nombres y presenta los polígonos en un mapa:
+
+```{r message=FALSE, warning=FALSE}
+# Paquete para manejo de datos vectoriales
+library(sf)
+
+# Lectura de la capa de cantones
+cantones <-
+  st_read(
+          "https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/cantones.geojson", 
+          quiet = T
+)
+
+# Filtro de los cantones "grandes" (area >= 2000)
+cantones_grandes <- cantones[cantones$area >= 2000, ]
+
+# Despliegue de los nombres y de las áreas de los cantones grandes
+cantones_grandes[, c("canton", "area"), drop = TRUE]
+
+
+# Mapeo de los cantones grandes
+plot(cantones_grandes["area"], axes = TRUE, graticule = TRUE)
+```
+
+Varios lenguajes de programación, además de R, permiten manejar datos geoespaciales de manera similar.
+
+
 
 ## El lenguaje de programación R
 [R](https://www.r-project.org/) es un lenguaje de programación enfocado en análisis estadístico. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse [aprendizaje automático (_machine learning_)](https://en.wikipedia.org/wiki/Machine_learning), [ciencia de datos](https://en.wikipedia.org/wiki/Data_science) y [_big data_](https://en.wikipedia.org/wiki/Big_data), con aplicaciones en campos como biomedicina, bioinformática y finanzas, entre muchos otros. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993.
