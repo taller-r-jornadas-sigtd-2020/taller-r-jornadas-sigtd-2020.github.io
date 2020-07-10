@@ -16,23 +16,31 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](img/Taller-7-01.png)
 
-## Presentación
-Este sitio web aloja los contenidos del taller "Manejo de datos geográficos mediante R y RStudio", el cual es parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
+## ¡Antes de empezar!
+Para reproducir los ejemplos en lenguaje R de este taller, debe instalar los programas R y RStudio disponibles en los siguientes enlaces:
 
-El sitio contiene tanto las explicaciones teóricas como el código fuente en R que las ejemplifica y los enlaces a los datos utilizados.
+* [Instalador de R](https://cran.r-project.org/mirrors.html)
+* [Instalador de RStudio](https://www.rstudio.com/)
+
+**Debe instalarse primero R y luego RStudio**. Si lo desea, puede seguir la guía disponible en [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu - DataCamp](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu/).
+
+## Presentación
+Este sitio web contiene los materiales del taller "Manejo de datos geográficos mediante R y RStudio", el cual es parte de la [II Jornada de Sistemas de Información Geográfica (SIG) y Teledetección (TD) libre de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/index.php/laboratorios/313-ii-jornadas-de-sig-2020), organizada por la [Escuela de Geografía de la Universidad de Costa Rica](https://www.geografia.fcs.ucr.ac.cr/).
+
+El sitio contiene tanto las explicaciones teóricas como el código fuente en R que las ejemplifica y los enlaces a los datos utilizados. Todo los recursos están disponibles en [https://github.com/taller-r-jornadas-sigtd-2020](https://github.com/taller-r-jornadas-sigtd-2020).
 
 ## Introducción
 Durante las últimas décadas, las aplicaciones SIG de escritorio (ej. ArcGIS, QGIS) han sido la forma más popular de procesamiento de datos geográficos mediante computadoras. Estas aplicaciones están basadas en una interfaz gráfica a la que el usuario accede mediante menús, botones, íconos y otros elementos similares. A pesar de sus ventajas, entre las que pueden destacarse su facilidad de uso y rápida curva de aprendizaje, los procesos realizados con la interfaz gráfica de un SIG de escritorio son difícilmente reproducibles o repetibles.
 
 Los enfoques basados en interfaces de líneas de comandos ofrecen ventajas mucho mayores en cuanto a reproductibilidad que los basados en interfaces gráficas. Una investigación reproducible es aquella que puede ser realizada de nuevo por personas diferentes a su autor, de manera tal que puedan obtener los resultados originales al seguir la misma metodología. Por lo general, la reproductibilidad requiere que tanto los comandos como los datos utilizados estén disponibles para quienes deseen utilizarlos.
 
-Los comandos se agrupan en programas, también llamados _scripts_ en inglés. Por ejemplo, la siguiente secuencia de comandos en el lenguaje de programación R carga la capa de cantones de Costa Rica, filtra aquellos con área mayor o igual a 2000 km2, lista los nombres y presenta los polígonos en un mapa:
+Los comandos se agrupan en programas, también llamados _scripts_ en inglés. Por ejemplo, la siguiente secuencia de comandos del lenguaje de programación R carga desde un archivo GeoJSON la capa de cantones de Costa Rica y filtra aquellos con área mayor o igual a 2000 km2:
 
 ```{r message=FALSE, warning=FALSE}
-# Paquete para manejo de datos vectoriales
+# Carga de paquete para manejo de datos vectoriales
 library(sf)
 
-# Lectura de la capa de cantones
+# Lectura de la capa de cantones de un archivo GeoJSON
 cantones <-
   st_read(
           "https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/cantones.geojson", 
@@ -41,18 +49,23 @@ cantones <-
 
 # Filtro de los cantones "grandes" (area >= 2000)
 cantones_grandes <- cantones[cantones$area >= 2000, ]
+```
 
+Note el uso del símbolo ```#``` para realizar "comentarios" en el [código fuente](https://es.wikipedia.org/wiki/C%C3%B3digo_fuente) del programa.
+
+El siguiente comando lista los cantones seleccionados:
+```{r message=FALSE, warning=FALSE}
 # Despliegue de los nombres y de las áreas de los cantones grandes
 cantones_grandes[, c("canton", "area"), drop = TRUE]
+```
 
-
+La función ```plot()``` despliega un mapa de los cantones seleccionados:
+```{r message=FALSE, warning=FALSE}
 # Mapeo de los cantones grandes
 plot(cantones_grandes["area"], axes = TRUE, graticule = TRUE)
 ```
 
-Varios lenguajes de programación, además de R, permiten manejar datos geoespaciales de manera similar.
-
-
+Otros lenguajes de programación permiten manejar datos geoespaciales de manera similar a R. Entre estos, destaca [Python](https://www.python.org/), un lenguaje de propósito general con un desarrollo muy activo en el área geoespacial. Otros lenguajes de importancia son [JavaScript](https://es.wikipedia.org/wiki/JavaScript), para desarrollo en la Web y [SQL](https://es.wikipedia.org/wiki/SQL), para bases de datos.
 
 ## El lenguaje de programación R
 [R](https://www.r-project.org/) es un lenguaje de programación enfocado en análisis estadístico. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse [aprendizaje automático (_machine learning_)](https://en.wikipedia.org/wiki/Machine_learning), [ciencia de datos](https://en.wikipedia.org/wiki/Data_science) y [_big data_](https://en.wikipedia.org/wiki/Big_data), con aplicaciones en campos como biomedicina, bioinformática y finanzas, entre muchos otros. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993.
@@ -66,9 +79,14 @@ Algunas de las principales características de este lenguaje son:
 
 R es un proyecto de [software libre](https://en.wikipedia.org/wiki/Free_software) que se comparte mediante una licencia [GNU General Public Licence (GNU GPL)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.
 
-Para programar en R, puede utilizarse una interfaz de línea de comandos y también ambientes de desarrollo integrados (IDE, _integrated development environment_) como [Jupyter](https://jupyter.org/) o [RStudio](https://rstudio.com/).
-
 ### Instalación de R y RStudio
+Para programar en R, puede utilizarse la interfaz de línea de comandos y también ambientes de desarrollo integrados (IDE, _integrated development environment_) como [Jupyter](https://jupyter.org/) o [RStudio](https://rstudio.com/), siendo este último el más utilizado y el que se empleará en este taller. Los instaladores pueden descargarse de:
+
+* [Instalador de R](https://cran.r-project.org/mirrors.html)
+* [Instalador de RStudio](https://www.rstudio.com/)
+
+**Debe instalarse primero R y luego RStudio**. Si lo desea, puede seguir la guía disponible en [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu - DataCamp](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu/).
+
 ### Sintaxis
 #### Funciones
 #### Tipos de datos
