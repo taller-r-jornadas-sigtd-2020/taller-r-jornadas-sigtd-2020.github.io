@@ -145,7 +145,7 @@ Las funciones de R se agrupan en conjuntos llamados bibliotecas, las cuales se d
 install.packages("rgdal")
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Carga del paquete sf
 library(rgdal)
 ```
@@ -160,8 +160,10 @@ Hay muchas formas de crear objetos en R. Una de las más sencillas es con los op
 ```{r}
 # Número
 x <- 10
+
 # Hilera de carácteres
 nombre <- 'Manuel'
+
 # Vector de hileras de carácteres
 dias <- c('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
 ```
@@ -171,11 +173,8 @@ Tanto ```x```, como ```nombre``` como ```dias``` son variables. Una variable es 
 El tipo de una variable (u objeto) puede consultarse con la función ```typeof()```. Por ejemplo:
 
 ```{r}
-print(typeof(x))
-```
-
-```{r}
-print(typeof(nombre))
+typeof(x)
+typeof(nombre)
 ```
 
 A continuación, se describen con más detalle algunos de los tipos de datos utilizados en el lenguaje R.
@@ -187,16 +186,18 @@ Pueden ser enteros o fracciones. Se utilizan en operaciones aritméticas (ej. su
 # Números enteros
 x <- 10
 y <- 20
+
 # Suma
-print(x + y)
+x + y
 ```
 
 ```{r}
 # Números decimales
 x <- 0.5
 y <- 3.14
+
 # Multiplicación
-print(x * y)
+x * y
 ```
 
 ##### Carácteres
@@ -206,8 +207,9 @@ Se utilizan para representar textos. Deben estar encerrados entre comillas simpl
 # Hileras de carácteres
 nombre <- "María"
 apellido <- "Pérez"
+
 # Concatenación
-print(paste(nombre, apellido))
+paste(nombre, apellido)
 ```
 
 ##### Booleanos
@@ -216,13 +218,15 @@ Los objetos _booleanos_ (también llamados lógicos) tienen dos posibles valores
 ```{r}
 # Variable booleana
 b = 1 < 2
-print(b)
+
+b
 ```
 
 ```{r}
 # Variable booleana
 c = 1 > 2
-print(c)
+
+c
 ```
 
 Las expresiones booleanas pueden combinarse con operadores como: 
@@ -233,17 +237,17 @@ Las expresiones booleanas pueden combinarse con operadores como:
 
 ```{r}
 # Operador lógico AND
-print((1 < 2) & (3 < 4))
+(1 < 2) & (3 < 4)
 ```
 
 ```{r}
 # Operador lógico OR
-print((2 + 2 == 5) | (20 <= 10))
+(2 + 2 == 5) | (20 <= 10)
 ```
 
 ```{r}
 # Operador lógico NOT
-print(!(2 + 2 == 5))
+!(2 + 2 == 5)
 ```
 
 ##### Vectores
@@ -252,13 +256,14 @@ Un vector es una estructura de una dimensión que combina objetos del mismo tipo
 ```{r}
 # Definición de un vector de números
 a = c(1, 2, 3, 4, 5)
-print(a)
+
+a
 ```
 
 ```{r}
 # Definición de un vector de hileras de carácteres
 b = c("Álvaro", "Ana", "Berta", "Bernardo")
-print(b)
+b
 ```
 
 ##### Data Frames
@@ -269,40 +274,88 @@ La función ```data.frame()``` puede utilizarse para crear un data frame a parti
 ```{r}
 # Vector de nombres de países
 paises = c("PAN", "CRI", "NIC", "SLV", "HND", "GTM", "BLZ", "DOM")
+
 # Vector de cantidades de habitantes (en millones)
 poblaciones = c(4.1, 5.0, 6.2, 6.4, 9.2, 16.9, 0.3, 10.6)
+
 # Creación de un data frame a partir de los dos vectores
-ca_poblacion_paises = data.frame(
+df_paises_poblaciones = data.frame(
                         pais = paises, 
                         poblacion = poblaciones
                       )
-print(ca_poblacion_paises)
+
+df_paises_poblaciones
 ```
 
 La función ```summary()``` proporciona un resumen de los contenidos de un data frame:
 ```{r}
 # Resumen de los contenidos del data frame
-print(summary(ca_poblacion_paises))
+summary(df_paises_poblaciones)
 ```
 
-#### Importación de datos
+### Importación de datos
 Por lo general, los datos con los que se trabaja en R provienen de fuentes externas, como archivos de texto, [bases de datos](https://en.wikipedia.org/wiki/Database) o [servicios web](https://en.wikipedia.org/wiki/Web_service). A continuación, se estudiarán funciones que permiten importar datos desde algunas de estas fuentes.
 
-##### La función read.csv()
+#### La función read.csv()
 La función ```read.csv()``` importa datos desde un archivo de valores separados por comas (CSV, _comma separated values_) y los almacena en un data frame. Como parámetro, recibe la ruta del archivo. Si la ruta no es absoluta, se toma como relativa al directorio actual de trabajo.
 
 En el siguiente ejemplo, se usa la función ```read.csv()``` para importar los datos de casos de COVID-19 en Costa Rica. Los datos usados en este ejemplo están basados en los publicados por el [Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/).
 
 ```{r}
 # Importación de casos de COVID-19 en Costa Rica
-covid19_general <- read.csv("https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/covid19-general-20200709.csv")
+df_covid19_general <- 
+  read.csv(
+    "https://raw.githubusercontent.com/taller-r-jornadas-sigtd-2020/datos/master/covid19-general-20200709.csv"
+  )
 
 # Despliegue de los últimos registros
-covid19_general[120:126, 
+df_covid19_general[120:126, 
                 c("FECHA", "positivos", "activos", "RECUPERADOS", "fallecidos")
                 ]
 ```
 
+### Graficación
+
+Una de las principales fortalezas de R es su capacidad para generar gráficos estadísticos. Uno de los varios paquetes especializados en este tipo de funciones es [plotly](https://plotly.com/r/).
+
+```{r eval=FALSE}
+# Instalación del paquete plotly para graficación
+install.packages("plotly")
+```
+
+En el siguiente gráfico, se muestra la evolución de los casos de COVID-19 en Costa Rica a través del tiempo.
+```{r message=FALSE, warning=FALSE}
+library(plotly)
+
+# Conversión de la columna FECHA al tipo Date
+df_covid19_general$FECHA <- as.Date(df_covid19_general$FECHA, "%d/%m/%Y")
+
+# Gráfico de variación de las cantidades de casos en el tiempo
+plot_ly(data = df_covid19_general,
+                x = ~ FECHA,
+                y = ~ positivos, 
+                name = 'Positivos', 
+                type = 'scatter',
+                mode = 'lines',
+                line = list(color = "blue")) %>%
+  add_trace(y = ~ activos,
+                    name = 'Activos',
+                    mode = 'lines',
+                    line = list(color = "red")) %>%
+  add_trace(y = ~ RECUPERADOS,
+                    name = 'Recuperados',
+                    mode = 'lines',
+                    line = list(color = "green")) %>%
+  add_trace(y = ~ fallecidos,
+                    name = 'Fallecidos',
+                    mode = 'lines',
+                    line = list(color = "purple")) %>%  
+  layout(title = "",
+                 yaxis = list(title = "Cantidad de casos"),
+                 xaxis = list(title = "Fecha"),
+                 legend = list(x = 0.1, y = 0.9),
+                 hovermode = "compare")
+```
 
 ## El ecosistema geoespacial de R
 
